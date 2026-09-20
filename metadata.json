@@ -1,0 +1,6 @@
+{
+  "name": "Free Fire",
+  "description": "Free Fire veb-sayti: 2 soniyali loading ekran, olmoslar katalogi va akkaunt turini tanlash.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
