@@ -3,6 +3,11 @@
   "buildCommand": "npm run build",
   "outputDirectory": "dist",
   "installCommand": "npm install --legacy-peer-deps",
+  "functions": {
+    "api/submit-player.ts": {
+      "includeFiles": "lib/submitPlayer.ts"
+    }
+  },
   "rewrites": [
     {
       "source": "/((?!api/).*)",

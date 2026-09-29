@@ -55,8 +55,12 @@ export function PlayerIdForm({
         providerName,
       });
       onSuccess(playerId.trim());
-    } catch {
-      setError('Serverga yuborib bo‘lmadi. Keyinroq qayta urinib ko‘ring.');
+    } catch (err) {
+      const message =
+        err instanceof Error && err.message
+          ? err.message
+          : 'Serverga yuborib bo‘lmadi. Keyinroq qayta urinib ko‘ring.';
+      setError(message);
     } finally {
       setIsSubmitting(false);
     }
